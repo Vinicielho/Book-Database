@@ -6,10 +6,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>Vinicius.example</groupId>
 	<artifactId>Book-Database</artifactId>
+
+	<!-- TODO:DOES THIS CHANGES THE  FINAL JAR FILES NAME? CAN I USE ENVIROMENT VARIABLES HERE?-->
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Book-Database</name>
 	<description>Fetch book info from open librarie&apos;s API</description>
@@ -45,12 +47,6 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,6 +66,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				<!-- TODO: IS THIS NECESSARY? -->
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

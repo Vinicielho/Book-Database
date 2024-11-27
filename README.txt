@@ -14,5 +14,5 @@ APP_CONTAINER_NAME=
 APP_CONTAINER_PORT=
 APP_PORT=
 
-Then "sudo docker-compose up --build" command in the src folder and let'er rip.
+Then then use docker-compose and let'er rip. BUT BE WARNED!: it is configured to NOT save data localy, it keeps it all in the container because this is a study system and i wanted it to be contained! if you somehow use this to actually manage a library of your own, give the docker-compose a volumes field.
 As of now there are no endpoints currently working, i will document them as there would.

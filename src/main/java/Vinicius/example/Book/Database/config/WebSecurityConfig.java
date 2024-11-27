@@ -25,7 +25,7 @@ public class WebSecurityConfig {
     @Value("${spring.datasource.password}")
     private String dbPassword;
     
-	// TODO: MOVE THE DATA SOURCE CONFIGURATIONS TO A DATASOURCE FILE!
+// TODO: MOVE THE DATA SOURCE CONFIGURATIONS TO A DATASOURCECONFIG FILE!
 @Bean
 public DataSource dataSource() {
     return DataSourceBuilder.create()

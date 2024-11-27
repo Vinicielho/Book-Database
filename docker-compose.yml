@@ -1,6 +1,8 @@
+#TODO: THERE ARE INFORMATIONS TO BE RECENTRALIZED: TARGED VARIABLE GOES WHERE?
+
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:17.2-alpine3.20
     container_name: ${POSTGRES_CONTAINER_NAME}
     environment:
       POSTGRES_DB: ${POSTGRES_DB_NAME}
@@ -8,25 +10,30 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD}
     ports:
       - "${POSTGRES_CONTAINER_PORT}:${POSTGRES_DB_PORT}"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    # TODO:STUDY THIS:
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    # TODO:STUDY THIS:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_DB_USER} -d ${POSTGRES_DB_NAME}"]
 
   app:
-    image: openjdk:23
     container_name: ${APP_CONTAINER_NAME}
-
+    # TODO:STUDY THIS:
     build:
       context: .
       dockerfile: Dockerfile
+      target: runtime
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:${POSTGRES_DB_PORT}/${POSTGRES_DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_DB_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_DB_PASSWORD}
     ports:
       - "${APP_CONTAINER_PORT}:${APP_CONTAINER_PORT}"
-
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
-volumes:
-  postgres_data:
+# TODO:STUDY THIS:
+# volumes:
+#   postgres_data:
