@@ -1,10 +1,12 @@
-# TODO: STUDY HOW TO CACHE BUILDS, AND MAYBE NOT HAVE TO DO THEM AGAIN ON STARTUP
 FROM maven:3.9.9-eclipse-temurin-23-alpine AS builder
 WORKDIR /app
-COPY pom.xml src/ ./src/
-RUN mvn install
+# TODO: I STILL CANT UNDERSTAND WHAT IS THE BEST WAY TO DO THIS, MINIMIZE LAYERS? SEPARATE COPYING SRC AND POM SO THAT IT WONT GET WHAT IS ALREADY UP TO DATE? OPTMIZE CACHING? AAAAAA
+COPY pom.xml .
+COPY src ./src
+# TODO: FIND A WAY TO CENTRALIZE THE FINAL ARTIFACT'S NAME (IT IS HARDCODED HERE AND ON THE COPY DOWN BELOW, BUT DYNAMICALLY REFERENCED IN POM.XML, WHAT A MESS!
+RUN mvn install -DfinalName=LibraryApplication
 
 FROM eclipse-temurin:23-alpine AS runtime
 WORKDIR /library
-COPY --from=builder /app/target/Book-Database-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/LibraryApplication.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

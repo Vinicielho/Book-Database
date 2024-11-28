@@ -10,8 +10,6 @@
 	</parent>
 	<groupId>Vinicius.example</groupId>
 	<artifactId>Book-Database</artifactId>
-
-	<!-- TODO:DOES THIS CHANGES THE  FINAL JAR FILES NAME? CAN I USE ENVIROMENT VARIABLES HERE?-->
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Book-Database</name>
 	<description>Fetch book info from open librarie&apos;s API</description>
@@ -61,6 +59,7 @@
 	</dependencies>
 
 	<build>
+	    <finalName>${finalName}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -77,5 +76,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
